@@ -1,3 +1,9 @@
+
+
+// OPENAI_COMPAT flag
+
+const openaiCompatEnabled = c.env.OPENAI_COMPAT === 'true';
+
 /**
  * Moltbot + Cloudflare Sandbox
  *
@@ -23,6 +29,7 @@
 import { Hono } from 'hono';
 import { getSandbox, Sandbox, type SandboxOptions } from '@cloudflare/sandbox';
 
+import telegram from './routes/telegram';
 import type { AppEnv, MoltbotEnv } from './types';
 import { MOLTBOT_PORT } from './config';
 import { createAccessMiddleware } from './auth';
@@ -144,7 +151,10 @@ app.route('/cdp', cdp);
 // PROTECTED ROUTES: Cloudflare Access authentication required
 // =============================================================================
 
-// Middleware: Validate required environment variables (skip in dev mode and for debug routes)
+// Middleware: Validate required environment variables 
+// Mount Telegram webhook routes (public)
+app.route('/telegram', telegram);
+(skip in dev mode and for debug routes)
 app.use('*', async (c, next) => {
   const url = new URL(c.req.url);
   
