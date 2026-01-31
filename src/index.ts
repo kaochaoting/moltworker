@@ -1,3 +1,9 @@
+
+
+// OPENAI_COMPAT flag
+
+const openaiCompatEnabled = c.env.OPENAI_COMPAT === 'true';
+
 /**
  * Moltbot + Cloudflare Sandbox
  *
